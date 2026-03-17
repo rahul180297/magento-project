@@ -1,0 +1,58 @@
+type Testimonial {
+    id: Int
+    company_name: String
+    name: String
+    message: String
+    post: String
+    profile_pic: String
+    status: Int
+    created_at: String
+    updated_at: String
+}
+
+type Query {
+    testimonials(id: Int): [Testimonial]
+        @resolver(class: "Kiwi\\Testimonials\\Model\\Resolver\\Testimonials")
+}
+
+type TestimonialResult {
+    items: [Testimonial]
+    total_count: Int
+}
+
+extend type Query {
+    testimonials(id: Int): TestimonialResult
+        @resolver(class: "Kiwi\\Testimonials\\Model\\Resolver\\Testimonials")
+}
+
+
+createTestimonial(
+    company_name: String
+    name: String
+    message: String
+    post: String
+    profile_pic: String
+    status: Int
+): Testimonial
+@resolver(class: "Kiwi\\Testimonials\\Model\\Resolver\\CreateTestimonial")
+
+
+type Mutation {
+    deleteTestimonial(id: Int!): Boolean
+        @resolver(
+            class: "Kiwi\\Testimonials\\Model\\Resolver\\DeleteTestimonial"
+        )
+}
+
+extend type Mutation {
+    createTestimonial(
+        id: Int
+        company_name: String
+        name: String
+        message: String
+        post: String
+        profile_pic: String
+        status: Int
+    ): Testimonial
+    @resolver(class: "Kiwi\\Testimonials\\Model\\Resolver\\CreateTestimonial")
+}
