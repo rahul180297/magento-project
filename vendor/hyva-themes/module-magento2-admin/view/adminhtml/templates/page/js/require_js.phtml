@@ -1,0 +1,21 @@
+<?php
+/** @var \Magento\Backend\Block\Page\RequireJs $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+$escaper        = $escaper ?? $block;
+$secureRenderer = $secureRenderer ?? $block->getData('secure_html_renderer_polyfill');
+$alpineJsPath   = $block->getData('alpinejs_path');
+?>
+<?php if ($alpineJsPath): ?>
+    <script src="<?php echo $block->getViewFileUrl($alpineJsPath); ?>" defer></script>
+<?php endif; ?>
+
+<?php
+$scriptString = '
+    var BASE_URL = \'' . /* @noEscape */ $block->getUrl('*') . '\';
+    var FORM_KEY = \'' . /* @noEscape */ $block->getFormKey() . '\';
+    var require = {
+        \'baseUrl\': \'' . /* @noEscape */ $block->getViewFileUrl('/') . '\'
+    };';
+
+echo /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false);

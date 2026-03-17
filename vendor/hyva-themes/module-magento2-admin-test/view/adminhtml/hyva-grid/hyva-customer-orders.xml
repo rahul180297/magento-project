@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<grid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Hyva_Admin:etc/hyva-grid.xsd">
+    <source>
+        <!-- Example of a collection grid data provider -->
+        <collection>Magento\Sales\Model\ResourceModel\Order\Grid\Collection</collection>
+
+        <!-- This takes care of showing the orders of the current customer in the grid. -->
+        <defaultSearchCriteriaBindings>
+            <field name="customer_id" requestParam="id"/>
+        </defaultSearchCriteriaBindings>
+    </source>
+    <columns>
+        <include>
+            <column name="increment_id" label="Order #"/>
+            <column name="created_at" label="Purchased" type="datetime"/>
+            <column name="billing_name" label="Bill-to Name"/>
+            <column name="shipping_name" label="Ship-to Name"/>
+            <column name="base_grand_total" label="Total" type="price"/>
+            <column name="store_id" label="Purchase Point" type="store_id" renderAsUnsecureHtml="true"/>
+        </include>
+    </columns>
+    <actions idColumn="entity_id">
+        <action id="reorder" label="Reorder" url="sales/order_create/reorder" idParam="order_id"/>
+    </actions>
+    <navigation>
+        <filters>
+            <filter column="increment_id"/>
+            <filter column="created_at"/>
+            <filter column="billing_name"/>
+            <filter column="shipping_name"/>
+            <filter column="base_grand_total" filterType="\Hyva\Admin\Model\GridFilter\ValueRangeFilter"/>
+            <filter column="store_id" source="\Magento\Config\Model\Config\Source\Store"/>
+        </filters>
+        <sorting>
+            <defaultSortByColumn>created_at</defaultSortByColumn>
+            <defaultSortDirection>desc</defaultSortDirection>
+        </sorting>
+    </navigation>
+</grid>

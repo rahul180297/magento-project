@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route url="/V1/test-graphql/products" method="GET">
+		<service class="Test\GraphQl\Api\ProductsManagementInterface" method="getProducts"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route url="/V1/test-graphql/blog" method="POST">
+		<service class="Test\GraphQl\Api\BlogRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Test_GraphQl::blog_save"/>
+		</resources>
+	</route>
+	<route url="/V1/test-graphql/blog/search" method="GET">
+		<service class="Test\GraphQl\Api\BlogRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Test_GraphQl::blog_view"/>
+		</resources>
+	</route>
+	<route url="/V1/test-graphql/blog/:blogId" method="GET">
+		<service class="Test\GraphQl\Api\BlogRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Test_GraphQl::blog_view"/>
+		</resources>
+	</route>
+	<route url="/V1/test-graphql/blog/:blogId" method="PUT">
+		<service class="Test\GraphQl\Api\BlogRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Test_GraphQl::blog_update"/>
+		</resources>
+	</route>
+	<route url="/V1/test-graphql/blog/:blogId" method="DELETE">
+		<service class="Test\GraphQl\Api\BlogRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Test_GraphQl::blog_delete"/>
+		</resources>
+	</route>
+</routes>

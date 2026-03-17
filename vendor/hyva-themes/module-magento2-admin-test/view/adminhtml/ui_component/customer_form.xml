@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- This is an example of how the hyva grid block can be used in an htmlContent ui component like the  -->
+    <!-- adminhtml customer details page. This example grid replicates the customer orders grid. -->
+    <htmlContent name="orders_hyva">
+        <block acl="Magento_Sales::actions_view" class="Magento\Ui\Component\Layout\Tabs\TabWrapper" name="orders_again">
+            <arguments>
+                <argument name="tab_label" xsi:type="string">Orders Hyva Example</argument>
+                <argument name="sort_order" xsi:type="number">50</argument>
+            </arguments>
+            <block name="hyva-customer-orders" class="Hyva\Admin\Block\Adminhtml\HyvaGrid"/>
+        </block>
+    </htmlContent>
+</form>
